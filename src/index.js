@@ -29,25 +29,14 @@ const MoneyBook = () => {
 
 const MoneyBookItem = (props) => {
   const {date, item, amount} = props.book
-  if (amount > 0) {
-    return (
-      <tr>
-        <td>{date}</td>
-        <td>{item}</td>
-        <td>{amount}</td>
-        <td></td>
-      </tr>
-    )
-  } else {
-    return (
-      <tr>
-        <td>{date}</td>
-        <td>{item}</td>
-        <td></td>
-        <td>{-amount}</td>
-      </tr>
-    )
-  }
+  return (
+    <tr>
+      <td>{date}</td>
+      <td>{item}</td>
+      <td>{amount >= 0 ? amount : null}</td>
+      <td>{amount < 0  ? -amount : null}</td>
+    </tr>
+  )
 }
 MoneyBookItem.propTypes = {
   book: PropTypes.object.isRequired
