@@ -36,21 +36,15 @@ class MoneyEntry extends Component {
     super(props)
     this.state = {date: '', item: '', amount: '', payingIn: true}
   }
-  onChangeDate(event) {
-    this.setState({date: event.target.value})
-  }
-  onChangeItem(event) {
-    this.setState({item: event.target.value})
-  }
-  onChangeAmount(event) {
-    this.setState({amount: event.target.value})
-  }
   onChanePayingIn(event) {
     this.setState({payingIn: event.target.value == "on"})
   }
   onClickSubmit() {
     this.props.add(this.state.date, this.state.item, this.state.amount * (this.state.payingIn ? 1 : -1))
     this.setState({date: '', item: '', amount: '', payingIn: false})
+  }
+  onChangeValue(event) {
+    this.setState({[event.target.name] : event.target.value})
   }
   render() {
     return (
@@ -61,9 +55,9 @@ class MoneyEntry extends Component {
             <input type="radio" value="on" checked={this.state.payingIn} onChange={(event) => this.onChanePayingIn(event)} /> 入金
             <input type="radio" value="off" checked={!this.state.payingIn} onChange={(event) => this.onChanePayingIn(event)} /> 出金
           </div>
-          <div>日付: <input type="text" value={this.state.date} onChange={(event) => this.onChangeDate(event)} placeholder="3/15" /> </div>
-          <div>項目: <input type="text" value={this.state.item} onChange={(event) => this.onChangeItem(event)} placeholder="おこづかい" /> </div>
-          <div>金額: <input type="text" value={this.state.amount} onChange={(event) => this.onChangeAmount(event)} placeholder="1000" /> </div>
+          <div>日付: <input type="text" value={this.state.date} name="date" onChange={(e) => this.onChangeValue(e)} placeholder="3/15" /> </div>
+          <div>項目: <input type="text" value={this.state.item} name="item" onChange={(e) => this.onChangeValue(e)} placeholder="おこづかい" /> </div>
+          <div>金額: <input type="text" value={this.state.amount} name="amount" onChange={(e) => this.onChangeValue(e)} placeholder="1000" /> </div>
           <div> <input type="submit" value="追加" onClick={() => this.onClickSubmit()} /> </div>
         </fieldset>
       </div>
